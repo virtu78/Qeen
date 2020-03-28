@@ -1,0 +1,28 @@
+{
+                 "items":  [
+                        {
+                            "id": 1,                            
+                            "name": "Money",
+                            "quantity": 1999,
+                            "position_x": -1,
+                            "position_y": -1,
+                            
+                        },
+                        {
+                            "id": 2,                           
+                            "name": "Corn",
+                            "quantity": 2,
+                            "position_x": 3,
+                            "position_y": 2,
+                            
+                        },
+                        {
+                            "id": 3,                            
+                            "name": "Corn",
+                            "quantity": 1,
+                            "position_x": 0,
+                            "position_y": 0,                            
+                        }
+
+                    ]
+                }

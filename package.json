@@ -1,0 +1,33 @@
+{
+    "name": "gtaphone",
+    "private": true,
+    "version": "1.0.0",
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "phone-build": "vue-cli-service build",
+        "phone-watch": "vue-cli-service build --watch",
+        "watch": "vue-cli-service build --watch"
+    },
+    "dependencies": {
+        "i18next": "^19.0",
+        "vue": "^2.6.11",
+        "vue-template-compiler": "^2.6.11",
+        "vue-select": "^3.9.4"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.7.7",
+        "@babel/plugin-proposal-class-properties": "^7.7.4",
+        "@babel/preset-env": "^7.7.7",
+        "@vue/cli-service": "^4.1.2",
+        "babel-loader": "^8.0.6",
+        "copy-webpack-plugin": "^5.1.1",
+        "path-dirname": "^1.0.2"
+    },
+    "eslintConfig": {
+        "env": {
+            "node": true,
+            "browser": true
+        }
+    }
+}
