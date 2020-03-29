@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- table1 - content table -->
-        <table>
+        <table ID='tbl'>
             <tr v-for="(row, i) in table">
                 <td draggable="true"
                     :key="j"
@@ -11,8 +11,8 @@
                     @dragover.prevent
                     @drop.stop="drop"
                     v-for="(item,  j) in row">
-                    <div class='id' v-if="item"><span >{{item.id}}</span>
-                        {{item.name}}
+                    <div id='item' v-if="item">
+                    <div id='id'>{{item.id}}</div><br>{{item.name}}
                     </div>
                 </td>
             </tr>
@@ -27,25 +27,14 @@
         name: "Storage",
         props: [],
         data() {
-            return {
-               
-                size: [8, 8],
-                
-                displayed: false,
-               
+            return {               
+                size: [8, 8],                
+                displayed: false,               
                 currentTarget: [],
                 nextTarget: [],
-                currentPosItem: {},
-                
+                currentPosItem: {}, 
+                currentItem: [],              
                  items:  [
-                        {
-                            id: 1,                            
-                            name: "Money",
-                            quantity: 167,
-                            position_x: -1,
-                            position_y: -1,
-                            
-                        },
                         {
                             id: 4,                           
                             name: "Queen",
@@ -66,8 +55,7 @@
                 
             }
         },
-        mounted() {
-        },
+
         computed: {
 
             table: function () {
@@ -77,62 +65,51 @@
                 }
                 _.forEach(this.items, (item) => {
                     if (item.position_x !== -1 && item.position_y !== -1)
-                        map[item.position_x][item.position_y] = item
-                
-                       
+                        map[item.position_x][item.position_y] = item; 
+
                     this.currentPosItem = item;
-                    if (item.position_x !== -1 && item.position_y !== -1)
-                        map[item.position_x][item.position_y] = this.currentPosItem;
+                 
+                    this.currentItem.push(this.currentPosItem)
+                    
+                    //console.log(this.currentItem)
                 });
                 return map;
             },
 
-            money: function () {
-                let money = _.find(this.items, (item) => item.item_id === Money);
-                if (!money)
-                    money = 0;
-                return new Intl.NumberFormat().format(money.quantity);
-            },
         },
-        methods: {
-          
+        methods: {          
 
             drag(event) {
                 let target = event.target
                 let i = target.dataset.row;
                 let j = target.dataset.ceil;
                 this.currentTarget = [j, i];
-                //if (target.tagName != 'SPAN') return;
-                  // console.log(target);
+               //if (cell.tagName != 'SPAN') return;            
+                 
+                 
             },
-
-
-
             drop(event) {
-                //if (cell.tagName != 'SPAN') return;
-                
+               //var v=this.currentItem.slice(0, 2);
+                let sheet=document.querySelector("#id");
+                var id = sheet.textContent; 
+                console.log(id);            
 
- 
-
-  
-let cell = event.target ;
- let span = cell.closest('id');
-//if (!span) return; // (2)
-
-  
-  //cell.innerHTML = cell.id
-  console.log(span)
-
-
-                
-               // console.log(cell);
-                let m = cell.parentNode.rowIndex;
-                let n = cell.cellIndex;
+                this.currentPosItem= this.currentItem.find(itm => itm.id == id)   
+                console.log(this.currentPosItem) 
+                //this.currentPosItem=t[0] ;
+                //console.log(this.currentPosItem) 
+                let target = event.target              
+                            // console.log(cell);
+                let m = target.parentNode.rowIndex;
+                let n = target.cellIndex;
                 this.nextTarget = [m, n];
-                this.currentPosItem.position_x = this.nextTarget[0];
-                this.currentPosItem.position_y = this.nextTarget[1];
-                console.log(this.currentPosItem);
+                this.currentPosItem.position_x = m;
+                this.currentPosItem.position_y = n;
+                        //console.log(this.currentPosItem.id);
+                this.currentItem.length=0;
+                  
             }
+
         },
     };
 </script>
@@ -147,5 +124,10 @@ let cell = event.target ;
         height: 40px;
         border: 1px solid #000;
     }
-
+ .iten{
+    
+ }
+  .id{
+    background-color: yellow;
+ }
 </style>
